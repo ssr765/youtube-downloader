@@ -5,6 +5,7 @@ from colorama import Fore
 
 from config.style import generar_ascii, limpiar
 
+
 generar_ascii()
 print()
 print("Presiona ENTER para comenzar la configuración del programa.")
@@ -39,7 +40,7 @@ En caso de no especificar ninguna las canciones de descargarán en "./downloads"
 
 download_path = "/".join(download_path.split("\\"))
 if download_path != "":
-    download_path += "/" if download_path[-1] != "/" else download_path
+    download_path += "/" if download_path[-1] != "/" else ""
 
 # Configuración de default_url
 limpiar()
