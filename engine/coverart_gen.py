@@ -15,6 +15,7 @@ def generar_cover(link) -> bytes:
 
     # Poner la miniatura en el fondo negro.
     cover = Image.open(BytesIO(data))
+    cover = cover.resize((1280, 720))
     Image.Image.paste(final_cover, cover, (0, 280))
 
     # Convertir la imagen a bytes y devolver los bytes.
