@@ -15,6 +15,20 @@ from engine.style import pintar, generar_ascii
 from engine.coverart_gen import generar_cover
 
 
+def nombre_valido(nombre) -> str:
+    # Convierte el nombre del archivo que eyed3 intenta buscar cuando añade
+    # los metadatos de la canción al nombre que youtube-dl le pone al archivo.
+    valido = ""
+    for x in nombre:
+        if x not in FORBIDDEN_CHARS:
+            valido += x
+        
+        else:
+            if valido[-1] != "_":
+                valido += "_"
+    
+    return valido
+
 def borrar_cache():
     # Borrar la cache.
     print(f"{Fore.BLUE}[⚙] Borrando la cache\n[⚙] ", end="")
@@ -38,8 +52,8 @@ def descargar_video(nombre_cancion, url, nombre_playlist = None):
         else:
             print(pintar(f"[+] {'(' + nombre_playlist + ') ' if nombre_playlist else ''}Descarga completada: {info['title']}.", Fore.GREEN))
 
-            # Añadir la metadata.
-            cancion = eyed3.load(DOWNLOAD_PATH + config['filename'].format(titulo=info['title'], canal=info['channel']) + f" - {info['id']}.mp3")
+            # Añadir los metadatos.
+            cancion = eyed3.load(nombre_valido(DOWNLOAD_PATH + config['filename'].format(titulo=info['title'], canal=info['channel']) + f" - {info['id']}.mp3"))
             cancion.tag.title = info['title']
 
             # Preferir datos de la canción en caso de que lo sea.
@@ -61,6 +75,7 @@ with open("config/config.yaml", "r", encoding="utf-8") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
 
+FORBIDDEN_CHARS = "\\/:*?\"<>|"
 FILENAME = config['filename'].format(titulo="%(title)s", canal="%(channel)s") + " - %(id)s.%(ext)s"
 
 # Si no se especifica localización de descarga, esta se hará en downloads/
