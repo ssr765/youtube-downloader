@@ -3,6 +3,7 @@ Script para descargar varias canciones de YouTube mediante multiprocesamiento y 
 ## Requisitos previos
 Los requisitos para que el programa pueda funcionar son los siguientes.
 - Python 3.7 o superior
+- [ffmpeg](https://www.gyan.dev/ffmpeg/builds/) [*Tutorial para instalarlo*](https://youtu.be/bM8SIjjVnP0)
 ## Instalación
 Antes de nada hay que instalar las librerías necesarias, para ello se puede usar el siguiente comando:
 ```
