@@ -1,0 +1,28 @@
+############################# CONFIGURACIÓN BÁSICA #############################
+### Nombre del archivo final descargado.
+#     {canal} representa el nombre del canal del vídeo.
+#     {título} representa el nombre del vídeo.
+#
+# Con el parámetro "[{canal}] {titulo}", el nombre del archivo sería:
+# [Rick Astley] Never Gonna Give You Up (Official Music Video - dQw4w9WgXcQ.mp3
+#
+# El id del vídeo al final del nombre es necesario para que el programa pueda
+# comprobar las canciones que ya han sido descargadas.
+filename: "[{canal}] {titulo}"
+
+### Ruta donde se descargarán las canciones.
+# En caso de no especificar ninguna las canciones de descargarán en ./downloads
+download_path: ""
+
+### Playlist por defecto
+# Al especificar una URL podrás ejecutar el programa sin el parámetro de URL y
+# descargará los nuevos videos de la lista especificada.
+#
+# Esto es útil para actualizar una lista que suelas escuchar.
+default_url: ""
+
+############################ CONFIGURACIÓN AVANZADA ############################
+### Hilos de procesamiento por cada núcleo del procesador.
+# Al aumentarlo se disminuye el tiempo de descarga de varios vídeos, pero
+# aumenta el uso del procesador!
+workers: 4
