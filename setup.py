@@ -3,7 +3,7 @@ import sys
 import yaml
 from colorama import Fore
 
-from config.style import generar_ascii, limpiar
+from engine.style import generar_ascii, limpiar
 
 
 generar_ascii()
@@ -38,6 +38,7 @@ En caso de no especificar ninguna las canciones de descargarán en "./downloads"
 
 > """)
 
+# Añadir la barra al final y eliminar las contrabarras.
 download_path = "/".join(download_path.split("\\"))
 if download_path != "":
     download_path += "/" if download_path[-1] != "/" else ""
@@ -53,6 +54,30 @@ descargará los nuevos videos de la lista especificada.
 Esto es útil para actualizar una lista que suelas escuchar.
 
 > """)
+
+# Configuración de cover_art
+limpiar()
+cover_art = input("""
+CONFIGURANDO: Miniatura como portada de la canción.
+Esta opción se encarga de que las canciones tengan portada o no
+Al ser activada las canciones incluiran la metadata album con el formato
+[{canal}] {titulo}.
+
+> (Habilitado por defecto) (S/N) """)
+
+if cover_art.lower() == "s":
+    cover_art = True
+
+elif cover_art.lower() == "n":
+    cover_art = False
+
+else:
+    if cover_art != "":
+        print(f"{Fore.RED}{cover_art} no es un valor valido.{Fore.RESET}")
+        sys.exit()
+    
+    else:
+        cover_art = True
 
 # Configuración de workers
 limpiar()
@@ -85,6 +110,7 @@ d = {
     'filename': filename, 
     'download_path': download_path,
     'default_url': default_url, 
+    'cover_art': cover_art,
     'workers': workers
 }
 

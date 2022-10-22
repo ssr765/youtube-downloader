@@ -3,14 +3,16 @@ import multiprocessing
 import os
 from pathlib import Path
 import sys
-import time
 import logging
+
+import eyed3
 import yaml
 from youtube_dl import YoutubeDL
 from colorama import Fore
 from youtube_dl.utils import DownloadError
 
-from config.style import pintar, generar_ascii
+from engine.style import pintar, generar_ascii
+from engine.coverart_gen import generar_cover
 
 
 def borrar_cache():
@@ -35,6 +37,17 @@ def descargar_video(nombre_cancion, url, nombre_playlist = None):
 
         else:
             print(pintar(f"[+] {'(' + nombre_playlist + ') ' if nombre_playlist else ''}Descarga completada: {info['title']}.", Fore.GREEN))
+
+            # Añadir la metadata.
+            cancion = eyed3.load(DOWNLOAD_PATH + config['filename'].format(titulo=info['title'], canal=info['uploader']) + f" - {info['id']}.mp3")
+            cancion.tag.title = info['title']
+            cancion.tag.artist = info['uploader']
+            
+            if COVER_ART:
+                cancion.tag.album = config['filename'].format(titulo=info['title'], canal=info['uploader'])
+                cancion.tag.images.set(3, generar_cover(info['thumbnail']), "image/jpeg")
+                
+            cancion.tag.save(version=eyed3.id3.ID3_V2_3)
             return
 
     print(pintar(f"[✖] {'(' + nombre_playlist + ') ' if nombre_playlist else ''}No se ha podido encontrar {nombre_cancion}.", Fore.RED))
@@ -52,6 +65,7 @@ FILENAME = config['filename'].format(titulo="%(title)s", canal="%(channel)s") + 
 DOWNLOAD_PATH = config['download_path'] if config['download_path'] != "" else "downloads/"
 DOWNLOAD_PATH = "/".join(DOWNLOAD_PATH.split("\\"))
 DEFAULT_URL = config['default_url']
+COVER_ART = config['cover_art']
 
 # Máximo de 50 procesos.
 WORKERS = config['workers']

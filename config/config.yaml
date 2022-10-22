@@ -21,6 +21,12 @@ download_path: ""
 # Esto es útil para actualizar una lista que suelas escuchar.
 default_url: ""
 
+### Miniatura como portada de la canción
+# Esta opción se encarga de que las canciones tengan portada o no
+# Al ser activada las canciones incluiran la metadata album con el formato
+# [{canal}] {titulo}.
+cover_art: true
+
 ############################ CONFIGURACIÓN AVANZADA ############################
 ### Hilos de procesamiento por cada núcleo del procesador.
 # Al aumentarlo se disminuye el tiempo de descarga de varios vídeos, pero
