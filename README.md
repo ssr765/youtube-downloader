@@ -12,10 +12,12 @@ pip install -r requirements.txt
 ## Primeros pasos
 Es recomendable antes de usar el programa usar el asistente de configuración configurar.py.
 ```
+cd [carpeta del script]
 python setup.py
 ```
 Una vez configurado el programa, este funciona de la siguiente manera:
 ```
+cd [carpeta del script]
 python main.py [URL de la canción o playlist de YouTube]
 ```
 No es necesario introducir una URL si se ha especificado una URL por defecto en la configuración, ya que entonces usará esa.
