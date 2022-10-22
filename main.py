@@ -39,14 +39,16 @@ def descargar_video(nombre_cancion, url, nombre_playlist = None):
             print(pintar(f"[+] {'(' + nombre_playlist + ') ' if nombre_playlist else ''}Descarga completada: {info['title']}.", Fore.GREEN))
 
             # Añadir la metadata.
-            cancion = eyed3.load(DOWNLOAD_PATH + config['filename'].format(titulo=info['title'], canal=info['uploader']) + f" - {info['id']}.mp3")
+            cancion = eyed3.load(DOWNLOAD_PATH + config['filename'].format(titulo=info['title'], canal=info['channel']) + f" - {info['id']}.mp3")
             cancion.tag.title = info['title']
-            cancion.tag.artist = info['uploader']
+
+            # Preferir datos de la canción en caso de que lo sea.
+            cancion.tag.artist = ";".join(info['artist'].split(",")) if "artist" in info else info['channel']
             
             if COVER_ART:
-                cancion.tag.album = config['filename'].format(titulo=info['title'], canal=info['uploader'])
+                cancion.tag.album = config['filename'].format(titulo=info['title'], canal=info['channel'])
                 cancion.tag.images.set(3, generar_cover(info['thumbnail']), "image/jpeg")
-                
+
             cancion.tag.save(version=eyed3.id3.ID3_V2_3)
             return
 
