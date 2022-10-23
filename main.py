@@ -82,8 +82,15 @@ FORBIDDEN_CHARS = "\\/:*?\"<>|"
 FILENAME = config['filename'].format(titulo="%(title)s", canal="%(channel)s") + " - %(id)s.%(ext)s"
 
 # Si no se especifica localización de descarga, esta se hará en downloads/
-DOWNLOAD_PATH = config['download_path'] if config['download_path'] != "" else "downloads/"
-DOWNLOAD_PATH = "/".join(DOWNLOAD_PATH.split("\\"))
+if len(sys.argv) >= 3:
+    DOWNLOAD_PATH = sys.argv[2]
+
+    if DOWNLOAD_PATH[-1] not in '\\/':
+        DOWNLOAD_PATH += "/"
+
+else:
+    DOWNLOAD_PATH = config['download_path'] if config['download_path'] != "" else "downloads/"
+
 DEFAULT_URL = config['default_url']
 COVER_ART = config['cover_art']
 
@@ -133,6 +140,7 @@ except IndexError:
 
     else:
         print(pintar(f"[⚠] Debes introducir una URL de YouTube.", Fore.RED))
+        print(pintar(f"    Uso: '{sys.argv[0]} [URL de YouTube] [(Opcional) Ruta de la descarga]'", Fore.RED))
         sys.exit()
 
 
