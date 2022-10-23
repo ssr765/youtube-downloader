@@ -1,5 +1,8 @@
-# youtube-downloader
-Script para descargar varias canciones de YouTube mediante multiprocesamiento y YouTube-DL.
+# <p align="center">youtube-downloader</p>
+Script para descargar canciones de YouTube mediante multiprocesamiento y YouTube-DL.
+## Características principales
+- Canciones con portada
+- Detección de canciones ya descargadas
 ## Requisitos previos
 Los requisitos para que el programa pueda funcionar son los siguientes.
 - Python 3.7 o superior
@@ -10,7 +13,7 @@ Antes de nada hay que instalar las librerías necesarias, para ello se puede usa
 pip install -r requirements.txt
 ```
 ## Primeros pasos
-Es recomendable antes de usar el programa usar el asistente de configuración configurar.py.
+Es recomendable antes de usar el programa usar el asistente de configuración ```setup.py```.
 ```
 cd [carpeta del script]
 python setup.py
