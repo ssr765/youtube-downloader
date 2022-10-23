@@ -34,9 +34,14 @@ limpiar()
 download_path = input("""
 CONFIGURANDO: Ruta donde se descargarán las canciones.
 
+    {musica} representa la carpeta de música en Windows. Si quieres que esa
+    sea la ruta, simplemente pon la etiqueta y nada más.
+
 En caso de no especificar ninguna las canciones de descargarán en "./downloads".
 
 > """)
+
+download_path = download_path.format(musica=os.path.expanduser('~') + "/Music/")
 
 # Añadir la barra al final y eliminar las contrabarras.
 download_path = "/".join(download_path.split("\\"))
