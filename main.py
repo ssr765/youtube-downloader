@@ -24,8 +24,11 @@ def nombre_valido(nombre) -> str:
             valido += x
         
         else:
-            if valido[-1] != "_":
+            if valido[-1] not in "_'" and x != "\"":
                 valido += "_"
+
+            elif valido[-1] not in "_'" and x == "\"":
+                valido += "'"
     
     return valido
 
@@ -53,7 +56,7 @@ def descargar_video(nombre_cancion, url, nombre_playlist = None):
             print(pintar(f"[+] {'(' + nombre_playlist + ') ' if nombre_playlist else ''}Descarga completada: {info['title']}.", Fore.GREEN))
 
             # Añadir los metadatos.
-            cancion = eyed3.load(nombre_valido(DOWNLOAD_PATH + config['filename'].format(titulo=info['title'], canal=info['channel']) + f" - {info['id']}.mp3"))
+            cancion = eyed3.load(DOWNLOAD_PATH + nombre_valido(config['filename'].format(titulo=info['title'], canal=info['channel']) + f" - {info['id']}.mp3"))
             cancion.tag.title = info['title']
 
             # Preferir datos de la canción en caso de que lo sea.
