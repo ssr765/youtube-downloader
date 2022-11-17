@@ -21,7 +21,7 @@ python setup.py
 Una vez configurado el programa, este funciona de la siguiente manera:
 ```
 cd [carpeta del script]
-python main.py [URL de la canción o playlist de YouTube]
+python main.py [URL de la canción o playlist de YouTube] [(Opcional) Ruta de descarga]
 ```
 No es necesario introducir una URL si se ha especificado una URL por defecto en la configuración, ya que entonces usará esa.
 
