@@ -1,4 +1,5 @@
 # <p align="center">youtube-downloader</p>
+# OBSOLETO Y DESCONTINUADO, trabajando en una nueva versión.
 Script para descargar canciones de YouTube mediante multiprocesamiento y YouTube-DL.
 ## Características principales
 - Canciones con portada
